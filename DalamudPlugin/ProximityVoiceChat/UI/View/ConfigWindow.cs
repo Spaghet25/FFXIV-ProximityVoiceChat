@@ -19,6 +19,7 @@ public class ConfigWindow
     public IReactiveProperty<bool> PlayingBackMicAudio { get; } = new ReactiveProperty<bool>();
     public IReactiveProperty<bool> PushToTalk { get; } = new ReactiveProperty<bool>();
     public IReactiveProperty<bool> SuppressNoise { get; } = new ReactiveProperty<bool>();
+    public IReactiveProperty<bool> AbbreviateNames { get; } = new ReactiveProperty<bool>();
     public IReactiveProperty<Keybind> KeybindBeingEdited { get; } = new ReactiveProperty<Keybind>();
     public IObservable<Keybind> ClearKeybind => clearKeybind.AsObservable();
     private readonly Subject<Keybind> clearKeybind = new();
@@ -141,6 +142,12 @@ public class ConfigWindow
         if (ImGui.Checkbox("Suppress Noise", ref suppressNoise))
         {
             this.SuppressNoise.Value = suppressNoise;
+        }
+
+        var abbreviateNames = this.AbbreviateNames.Value;
+        if (ImGui.Checkbox("Abbreviate Names", ref abbreviateNames))
+        {
+            this.AbbreviateNames.Value = abbreviateNames;
         }
 
         ImGui.Dummy(new Vector2(0.0f, 5.0f)); // ---------------
